@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Ansible with specific version
-RUN pip3 install ansible-core==${ANSIBLE_VERSION}
+RUN pip3 install ansible-core==${ANSIBLE_VERSION} --break-system-packages
 
 # Verify installations
 RUN node --version && \
