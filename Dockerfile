@@ -26,6 +26,6 @@ RUN node --version && \
     ansible --version
 
 # Set working directory
-WORKDIR /workspace
+WORKDIR /etc/ansible
 
 CMD ["bash"]
