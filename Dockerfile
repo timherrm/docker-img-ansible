@@ -1,7 +1,7 @@
-FROM node:20-slim
+FROM node:25.0.0-slim
 
 # Set Ansible version
-ARG ANSIBLE_VERSION=2.15.5
+ARG ANSIBLE_VERSION=2.19.3
 
 # Install system dependencies and Python
 RUN apt-get update && apt-get install -y \
