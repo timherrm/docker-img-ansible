@@ -39,7 +39,7 @@ jobs:
       - name: Extract Ansible version and set date
         id: version-info
         run: |
-          ANSIBLE_VERSION=$(grep "ANSIBLE_VERSION=" Dockerfile | cut -d'=' -f2)
+          ANSIBLE_VERSION=$(grep "ansible-core==" pip-requirements.txt | cut -d'=' -f3)
           echo "ansible_version=${ANSIBLE_VERSION}" >> $GITHUB_OUTPUT
           echo "date=$(date +'%Y%m%d%H%M')" >> $GITHUB_OUTPUT
 
@@ -66,8 +66,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          build-args: |
-            ANSIBLE_VERSION=${{ steps.version-info.outputs.ansible_version }}
           annotations: |
             org.opencontainers.image.description=${{ steps.desc.outputs.description }}
           tags: ${{ steps.meta.outputs.tags }}
