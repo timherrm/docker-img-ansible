@@ -4,8 +4,10 @@ Multi-arch Docker image based on Node that includes Python, Git and ansible-core
 
 This repository contains:
 
-- `Dockerfile` - builds a container from `node:<version>-slim` and installs `python3`, `git` and `ansible-core` (version set by `ANSIBLE_VERSION` ARG).
-- `.github/workflows/docker-build.yml` - GitHub Actions workflow that builds multi-architecture images and pushes to GitHub Container Registry (ghcr.io).
+- `Dockerfile` - builds a container from `node:<version>-slim` and installs Python packages and Ansible collections
+- `pip-requirements.txt` - specifies Python package versions including ansible-core
+- `galaxy-requirements.yml` - specifies Ansible collections to install
+- `.github/workflows/docker-build.yml` - GitHub Actions workflow that builds multi-architecture images and pushes to GitHub Container Registry (ghcr.io)
 
 ## Image name
 
@@ -45,9 +47,23 @@ echo "$GHCR_PAT" | docker login ghcr.io -u <your-username> --password-stdin
 docker pull ghcr.io/timherrm/docker-img-ansible:ansible-2.19.3-202510231200
 ```
 
-## Changing the Ansible version
+## Managing Dependencies
 
-To change the installed ansible-core version, update the `ANSIBLE_VERSION` ARG in the `Dockerfile` and push to `main`. The GitHub Actions workflow will build and publish a new image with tags that include the updated version.
+### Python Packages
+
+Python packages and their versions are managed in `pip-requirements.txt`. To change the ansible-core version or add new Python packages:
+
+1. Edit `pip-requirements.txt`
+2. Push to `main`
+3. The workflow will build a new image with updated packages
+
+### Ansible Collections
+
+Ansible collections are managed in `galaxy-requirements.yml`. To add or update collections:
+
+1. Edit `galaxy-requirements.yml`
+2. Push to `main`
+3. The workflow will build a new image with updated collections
 
 ## License
 
