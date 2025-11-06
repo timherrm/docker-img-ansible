@@ -1,4 +1,4 @@
-FROM node:25.0.0-slim
+FROM node:25.1.0-slim
 
 # Image description
 ARG IMAGE_DESCRIPTION="Docker image with Node, Git, Python and Ansible"
