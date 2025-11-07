@@ -56,20 +56,11 @@ jobs:
             type=raw,value=ansible-${{ steps.version-info.outputs.ansible_version }}-${{ steps.version-info.outputs.date }}
             type=raw,value=latest,enable={{is_default_branch}}
 
-      - name: Build description string
-        id: desc
-        run: |
-          # Build a reusable description matching the Dockerfile LABEL
-          DESC="Docker image with Node, Git, Python and Ansible (ansible-core=${{ steps.version-info.outputs.ansible_version }})"
-          echo "description=$DESC" >> $GITHUB_OUTPUT
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          annotations: |
-            org.opencontainers.image.description=${{ steps.desc.outputs.description }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
