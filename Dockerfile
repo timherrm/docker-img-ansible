@@ -1,14 +1,13 @@
 FROM node:25.1.0-slim
 
-# Image description
-ARG IMAGE_DESCRIPTION="Docker image with Node, Git, Python and Ansible"
-
 # Install system dependencies and Python
-RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip git && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create non-root user with a stable UID/GID (CI-safe)
+RUN groupadd -g 1001 ciuser && \
+    useradd -m -u 1001 -g 1001 ciuser
 
 # Copy requirements files
 COPY pip-requirements.txt .
@@ -16,22 +15,27 @@ COPY pip-requirements.txt .
 # Install Python packages
 RUN pip3 install -r pip-requirements.txt --break-system-packages
 
+# Prepare work directory
+WORKDIR /etc/ansible
+RUN mkdir -p /etc/ansible && \
+    chown -R ciuser:ciuser /etc/ansible
+
+# Enable passwordless root access
+# RUN passwd -d root
+
+# Switch to non-root user
+USER ciuser
+
 # Copy requirements files
-COPY galaxy-requirements.yml .
+COPY requirements.yml .
 
 # Install Ansible collections
-RUN ansible-galaxy collection install -r galaxy-requirements.yml
+RUN ansible-galaxy collection install -r requirements.yml
 
-# OCI label: description (recommended for registry UI and multi-arch manifests)
-LABEL org.opencontainers.image.description="${IMAGE_DESCRIPTION}"
-
-# Verify installations
 RUN node --version && \
     python3 --version && \
     git --version && \
-    ansible --version
-
-# Set working directory
-WORKDIR /etc/ansible
+    ansible --version && \
+    ansible-galaxy collection list
 
 CMD ["bash"]
