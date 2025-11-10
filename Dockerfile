@@ -26,6 +26,9 @@ RUN mkdir -p /etc/ansible && \
 # Switch to non-root user
 USER ciuser
 
+# Add .ssh folder
+RUN mkdir /home/ciuser/.ssh
+
 # Copy requirements files
 COPY requirements.yml .
 
