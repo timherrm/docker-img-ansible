@@ -1,33 +1,54 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": [
+    "config:recommended"
+  ],
   "automerge": false,
   "automergeType": "pr",
   "platformAutomerge": true,
-  "requiredStatusChecks": null,
+  "ignoreTests": true,
   "packageRules": [
     {
       "description": "Docker base image: node (allow minor + patch)",
-      "matchManagers": ["dockerfile"],
-      "matchPackageNames": ["node"],
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchPackageNames": [
+        "node"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "automerge": true,
-      "stabilityDays": 3
+      "minimumReleaseAge": "3 days"
     },
     {
       "description": "pip ansible-core package (patch only)",
-      "matchManagers": ["pip_requirements", "pip_setup"],
-      "matchPackageNames": ["ansible-core"],
-      "matchUpdateTypes": ["patch"],
+      "matchManagers": [
+        "pip_requirements",
+        "pip_setup"
+      ],
+      "matchPackageNames": [
+        "ansible-core"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
       "automerge": true,
-      "stabilityDays": 3
+      "minimumReleaseAge": "3 days"
     },
     {
       "description": "pip ansible-lint package (all updates)",
-      "matchManagers": ["pip_requirements", "pip_setup"],
-      "matchPackageNames": ["ansible-lint"],
+      "matchManagers": [
+        "pip_requirements",
+        "pip_setup"
+      ],
+      "matchPackageNames": [
+        "ansible-lint"
+      ],
       "automerge": true,
-      "stabilityDays": 3
+      "minimumReleaseAge": "3 days"
     }
   ]
 }
