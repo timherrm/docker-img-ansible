@@ -28,10 +28,6 @@
       "matchPackageNames": ["ansible-lint"],
       "automerge": true,
       "stabilityDays": 3
-    },
-    {
-      "matchUpdateTypes": ["major", "minor", "patch"],
-      "automerge": false
     }
   ]
 }
