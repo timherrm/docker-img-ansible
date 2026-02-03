@@ -4,3 +4,5 @@ collections:
     version: 2.1.0
   - name: ceph.automation
     version: 1.1.0
+  - name: ineg14eg.cephautomation
+    version: 1.0.0
