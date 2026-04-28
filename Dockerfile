@@ -4,10 +4,12 @@ FROM node:25.9.0-trixie-slim
 RUN apt-get update && \
     apt-get install -y python3 python3-pip git vim jq && \
     rm -rf /var/lib/apt/lists/*
+#Make the user id 1000 non-unique
+RUN usermod -o -u 1000 <user>
 
 # Create non-root user with a stable UID/GID (CI-safe)
-RUN groupadd -g 1001 ciuser && \
-    useradd -m -u 1001 -g 1001 ciuser
+RUN groupadd -g 1000 ciuser && \
+    useradd -m -u 1000 -g 1000 ciuser
 
 # Copy requirements files
 COPY pip-requirements.txt .
