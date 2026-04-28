@@ -42,4 +42,4 @@ RUN node --version && \
     ansible --version && \
     ansible-galaxy collection list
 
-CMD ["bash"]
+ENTRYPOINT ["/bin/bash"]
