@@ -6,8 +6,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Create non-root user with a stable UID/GID (CI-safe)
-RUN groupadd -g 1001 ciuser && \
-    useradd -m -u 1001 -g 1001 ciuser
+RUN groupadd -g 1000 ciuser && \
+    useradd -m -u 1000 -g 1000 ciuser
 
 # Copy requirements files
 COPY pip-requirements.txt .
