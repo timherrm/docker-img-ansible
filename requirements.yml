@@ -6,3 +6,7 @@ collections:
     version: 1.1.0
   - name: ineg14eg.cephautomation
     version: 1.0.0
+  - name: git@erebor.netz.uni-magdeburg.de:222/URZ-N/urzn-collection.git
+    type: git
+    version: main
+    
