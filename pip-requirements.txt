@@ -2,3 +2,4 @@ ansible-core==2.21.1
 ansible-lint==26.4.0
 passlib==1.7.4
 molecule==26.4.0
+molecule-podman==2.0.3
