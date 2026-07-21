@@ -25,6 +25,9 @@ COPY pip-requirements.txt .
 # Install Python packages
 RUN pip3 install -r pip-requirements.txt --break-system-packages
 
+# Copy git-verion.txt from install step
+COPY --from=install /git-version.txt /git-version.txt
+
 # Prepare work directory
 WORKDIR /etc/ansible
 RUN mkdir -p /etc/ansible && \
