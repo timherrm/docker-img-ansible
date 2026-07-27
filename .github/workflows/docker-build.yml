@@ -59,7 +59,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=raw,value=ansible-${{ steps.version-info.outputs.ansible_version }}
-            type=raw,value=ansible-${{ steps.version-info.outputs.ansible_version }}-${{ steps.version-info.outputs.date }}
+            type=raw,value=ansible-${{ steps.version-info.outputs.ansible_version }}-build.${{ steps.version-info.outputs.date }}
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image
