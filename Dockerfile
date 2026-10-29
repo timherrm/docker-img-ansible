@@ -7,7 +7,7 @@ COPY . /git/
 
 RUN find . -type d -name .git -exec git describe --always --dirty > /git-version.txt \;
 
-FROM node:25.9.0-trixie-slim
+FROM node:26.13.0-trixie-slim
 
 # Install system dependencies and Python
 RUN apt-get update && \
